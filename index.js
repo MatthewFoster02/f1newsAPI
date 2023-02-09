@@ -6,9 +6,18 @@ const express = require('express');
 const cheerio = require('cheerio');
 const axios = require('axios');
 const fs = require('fs');
+const cors = require("cors");
+
+const corsOptions = {
+   origin: '*', 
+   credentials: true,            //access-control-allow-credentials:true
+   optionSuccessStatus: 200,
+}
 
 // Set app
 const app = express();
+
+app.use(cors(corsOptions)); // Use this after the variable declaration
 
 // Load in f1 news sources to scrape
 let rawdata = fs.readFileSync('f1sources.json');
@@ -16,10 +25,19 @@ let news_sources = JSON.parse(rawdata);
 
 // Define articles array, list of recent f1 news articles from the sources
 let articles = [];
-for(let key in news_sources)
+const refresh = function refreshContent()
 {
-    getArticles(key, news_sources[key]);
+    loadContent();
 }
+function loadContent()
+{
+    articles = [];
+    for(let key in news_sources)
+    {
+        getArticles(key, news_sources[key]);
+    }
+}
+loadContent();
 
 // Home page route
 app.get('/', (req, res) =>
@@ -172,6 +190,7 @@ function cleanTitle(name, title)
             title = title.replaceAll('News\n', '');
             title = title.replaceAll('Report\n', '');
             title = title.replaceAll('Video\n', '');
+            title = title.replaceAll('Poll\n', '');
             title = title.replaceAll('Image Gallery\n', '');
             break;
         case 'skyf1':
@@ -187,3 +206,5 @@ function cleanTitle(name, title)
     title = title.trim();
     return title;
 }
+
+setInterval(refresh, 1000*60); // Refresh content every minute
