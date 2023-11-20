@@ -9,7 +9,7 @@ Axois - accesses the source websites so cheerio can scrape.
 The server is hosted on the free tier of [Render](https://render.com/), which can mean delays when trying to access endpoints as the server shutsdown during periods with no traffic 
 and must reboot when a request is received. 
 
-Want to access the data yourself, visit the following endpoints:
+### Want to access the data yourself, visit the following endpoints:
 
 [https://f1newsapi.onrender.com/news](https://f1newsapi.onrender.com/news) to get all articles
 
