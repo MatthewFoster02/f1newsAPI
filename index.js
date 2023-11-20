@@ -160,7 +160,7 @@ function getArticles(name, news_source)
                     {
                         let prefixLength = '/f1/news/'.length;
                         if(link.length <= prefixLength) return; // Guard which stops links containing only '/f1/news/'
-                        if(link.includes('?p=')) return; // Guard on links with this substring
+                        //if(link.includes('?p=')) return; // Guard on links with this substring
                         if(previosLinks.filter(x => x==link).length == 1) // The second occurence of each link contains the correct title
                         {
                             articles.push(
@@ -201,9 +201,11 @@ function cleanTitle(name, title)
             break;
         case 'autosport':
             title = title.replaceAll("\"", "'");
+            title = title.replaceAll("\n", "");
             break;
     }
     title = title.trim();
+    if(name === 'autosport') console.log(title);
     return title;
 }
 
