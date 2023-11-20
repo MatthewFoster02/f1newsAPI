@@ -186,12 +186,12 @@ function cleanTitle(name, title)
     switch(name)
     {
         case 'f1':
-            title = title.replaceAll('Feature\n', '');
-            title = title.replaceAll('News\n', '');
-            title = title.replaceAll('Report\n', '');
-            title = title.replaceAll('Video\n', '');
-            title = title.replaceAll('Poll\n', '');
-            title = title.replaceAll('Image Gallery\n', '');
+            title = title.replaceAll('Feature', '');
+            title = title.replaceAll('News', '');
+            title = title.replaceAll('Report', '');
+            title = title.replaceAll('Video', '');
+            title = title.replaceAll('Poll', '');
+            title = title.replaceAll('Image Gallery', '');
             break;
         case 'skyf1':
             break;
